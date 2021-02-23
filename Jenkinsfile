@@ -1,19 +1,14 @@
 pipeline{
-   agent {
-    docker {
-      image 'maven:3.6.3-jdk-11'
-      args '-v /root/.m2:/root/.m2'
-    }
-  }
+   agent any
   stages {
       stage("Maven Build"){
           steps{
-              sh 'mvn -B -DskipTests clean package'
+              sh 'mvn clean compile'
           }
       }
       stage('Maven Test'){
             steps{
-                sh 'mvn test'
+                sh 'mvn clean test'
             }
             post{
             always{
@@ -24,9 +19,9 @@ pipeline{
      stage("Build & SonarQube analysis") {
             agent any
             steps {
-              withSonarQubeEnv('Sonar-Service2') {
+              withSonarQubeEnv('sonar-server3') {
                 sh 'java -version'
-                sh 'mvn clean package sonar:sonar'
+                sh 'mvn clean verify sonar:sonar'
               }
             }
           }
@@ -38,7 +33,8 @@ pipeline{
            "files" :[
            {
            "pattern":"target/*.jar",
-           "target":"art-doc-devo-loc"
+           "target":"art-doc-dev-loc-challenge/
+"
            }
            ]
          }''',
