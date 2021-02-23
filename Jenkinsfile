@@ -21,7 +21,7 @@ pipeline{
             steps {
               withSonarQubeEnv('sonar-server3') {
                 sh 'java -version'
-                sh 'mvn clean verify sonar:sonar'
+                sh 'mvn verify sonar:sonar'
               }
             }
           }
@@ -33,7 +33,7 @@ pipeline{
            "files" :[
            {
            "pattern":"target/*.jar",
-           "target":"art-doc-dev-loc-challenge/
+           "target":"art-doc-dev-loc-challenge/"
 "
            }
            ]
