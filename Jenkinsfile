@@ -29,22 +29,23 @@ pipeline{
               }
             }
           }
-     stage('Deploy to artifactory'){
-        steps{
-        rtUpload(
-         serverId : 'ARTIFACTORY_SERVER',
-         spec :'''{
-           "files" :[
-           {
-           "pattern":"target/*.jar",
-           "target":"art-doc-dev-loc-challenge/"
-"
-           }
-           ]
-         }''',
-         
-      )
-      }
-     }
+     
+     
+     stage("Uploading to artifactory"){
+    steps{
+    rtUpload (
+    serverId: 'ARTIFACTORY_SERVER',
+    spec: '''{
+          "files": [
+            {
+              "pattern": "target/*.jar",
+              "target": "art-doc-dev-loc-challenge"
+            }
+         ]
+    }''',
+)
+}}
+     
+     
     }
   }
