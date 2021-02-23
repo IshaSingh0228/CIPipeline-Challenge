@@ -3,12 +3,12 @@ pipeline{
   stages {
       stage("Maven Build"){
           steps{
-              sh 'mvn clean compile'
+              bat 'mvn clean compile'
           }
       }
       stage('Maven Test'){
             steps{
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
             post{
             always{
@@ -20,8 +20,8 @@ pipeline{
             agent any
             steps {
               withSonarQubeEnv('sonar-server3') {
-                sh 'java -version'
-                sh 'mvn verify sonar:sonar'
+                bat 'java -version'
+                bat 'mvn verify sonar:sonar'
               }
             }
           }
