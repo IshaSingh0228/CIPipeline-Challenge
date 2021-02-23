@@ -30,6 +30,11 @@ pipeline{
             }
           }
      
+      stage('package'){
+          steps{
+          bat 'mvn package'
+          }
+}    
      
      stage("Uploading to artifactory"){
     steps{
